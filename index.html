@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wavly</title>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("PDD64lZbijtiyOxUn");
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">Wavly</div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+      <h1>Caps</h1>
+      <p>!Choose your favorite cap and order it now</p>
+    </section>
+    <!DOCTYPE html>
+    <html lang="ar">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>طلب كاب</title>
+        <link rel="stylesheet" href="style.css" />
+      </head>
+      <body>
+        <div class="caps-container">
+          <div class="cap" data-name="Black  " data-price="150">
+            <img
+              src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥ (2).jpg"
+              alt="كاب أسود"
+            />
+            <h3>200EG</h3>
+            <button class="order-btn">Order now</button>
+          </div>
+          <div class="cap" data-name=" Black  " data-price="140">
+            <img src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥.jpg" alt="كاب أبيض" />
+            <h3>100EG</h3>
+            <button class="order-btn">Order now</button>
+          </div>
+
+          <div class="cap" data-name="كاب اخضر" data-price="30">
+            <img
+              src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥ (2).jpg"
+              alt="whiate  "
+            />
+            <h3>150EG</h3>
+            <button class="order-btn">Order now</button>
+          </div>
+          <!-- زود كابات هنا -->
+        </div>
+        <form id="orderForm" class="hidden">
+          <h2>Order Form</h2>
+
+          <label>:Name </label>
+          <input type="text" id="name" required />
+
+          <label>:Phone </label>
+          <input type="text" id="phone" required />
+
+          <label>:Address </label>
+          <input type="text" id="address" required />
+
+          <label>:Region </label>
+          <select id="region" required>
+            <option value="">select</option>
+            <option value="cairo">maadi-cairo</option>
+            <option value="sadat-city">sadat-city</option>
+            <option value="Helwan University">Helwan University</option>
+            <option value="King Salman University">
+              King Salman University
+            </option>
+            <option value="Another">Another</option>
+          </select>
+
+          <div class="form-group">
+            <label for="coupon">🎁 :coupon</label>
+            <input type="text" id="coupon" placeholder="مثال: SAVE20" />
+          </div>
+
+          <p id="shippingCost"></p>
+
+          <div id="productsContainer">
+            <h3>Products</h3>
+            <!-- أول منتج افتراضي -->
+            <div class="product">
+              <label>Product Name:</label>
+              <input type="text" name="productName[]" required />
+
+              <label>Price:</label>
+              <input type="number" name="productPrice[]" required />
+
+              <label>Quantity:</label>
+              <input
+                type="number"
+                name="productQty[]"
+                value="1"
+                min="1"
+                required
+              />
+            </div>
+          </div>
+
+          <br /><br />
+          <button type="submit">Submit</button>
+        </form>
+
+        <div id="invoice" class="hidden"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <p>© 2025 Wavly. كل الحقوق محفوظة.</p>
+        </footer>
+
+        <script src="./script/script.js"></script>
+      </body>
+    </html>
+  </body>
+</html>

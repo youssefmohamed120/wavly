@@ -1,0 +1,170 @@
+body {
+  font-family: 'Tajawal', sans-serif;
+  margin: 0;
+  background: linear-gradient(45deg, #0f0f0f, #13282c);
+  color: #333;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+ background: linear-gradient(45deg, #0f0f0f, #182e33);
+  color: white;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+}
+.header .logo {
+  font-size: 22px;
+  font-weight: bold;
+ margin-right: 40%;
+}
+.header nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Banner */
+.banner {
+  text-align: center;
+  background: linear-gradient(45deg, #0f0f0f, #182e33);
+  color: white;
+  padding: 50px 20px;
+}
+.banner h1 {
+  font-size: 36px;
+}
+.banner p {
+  font-size: 18px;
+}
+
+/* Products */
+.caps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+.cap {
+  background:  hwb(0 100% 0%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  padding: 12px;
+  transition: transform 0.25s ease;
+}
+.cap:hover {
+  transform: translateY(-5px);
+}
+.cap img {
+  width: 100%;
+  border-radius: 10px;
+}
+.cap .price {
+  color: #0077ff;
+  font-weight: bold;
+}
+.order-btn {
+  background: #0077ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+.order-btn:hover {
+  background: #005dc1;
+}
+
+/* Form */
+form {
+  background: white;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+form h2 {
+  margin-bottom: 20px;
+  color: #0077ff;
+  text-align: center;
+}
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+}
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.submit-btn {
+  margin-top: 20px;
+  width: 100%;
+  background: #0077ff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background: #005dc1;
+}
+
+/* Success Message */
+.success-message {
+  background: white;
+  padding: 30px;
+  max-width: 400px;
+  margin: 60px auto;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+.success-message h2 {
+  color: #28a745;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.success-message p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Footer */
+.footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+}
+
+/* Hide/Show */
+.hidden {
+  display: none;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
