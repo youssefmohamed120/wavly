@@ -1,9 +1,14 @@
+// عناصر أساسية
 const orderButtons = document.querySelectorAll(".order-btn");
+const overlay = document.getElementById("overlay");
+const drawer = document.getElementById("orderDrawer");
+const closeDrawerBtn = document.getElementById("closeDrawer");
 const form = document.getElementById("orderForm");
 const regionSelect = document.getElementById("region");
 const shippingCostDisplay = document.getElementById("shippingCost");
 const invoice = document.getElementById("invoice");
 
+// أكواد خصم + الشحن (كما في سكربتك الأصلي)
 const coupons = {
   "SAVE20": { discount: 20, expiry: "2025-08-15" },
   "AUG10": { discount: 10, expiry: "2025-08-10" },
@@ -18,18 +23,37 @@ const shippingPrices = {
   "Another": 100
 };
 
-// مصفوفة المنتجات المختارة
+// السلة
 let cart = [];
 
-// عند الضغط على أي زرار "Order"
+/* ---------- وظائف فتح/غلق الدروار ---------- */
+function openDrawer() {
+  drawer.classList.add("open");
+  overlay.classList.add("show");
+  overlay.setAttribute("aria-hidden", "false");
+}
+function closeDrawer() {
+  drawer.classList.remove("open");
+  overlay.classList.remove("show");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+// Overlay & زر الإغلاق & ESC
+overlay.addEventListener("click", closeDrawer);
+closeDrawerBtn.addEventListener("click", closeDrawer);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeDrawer();
+});
+
+/* ---------- عند الضغط على Order لأي منتج ---------- */
 orderButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const cap = btn.parentElement;
+    const cap = btn.closest(".cap");
     const productName = cap.getAttribute("data-name");
-    const productPrice = parseInt(cap.getAttribute("data-price"));
+    const productPrice = parseInt(cap.getAttribute("data-price"), 10);
 
     // لو المنتج موجود، زوّد الكمية
-    const existing = cart.find(p => p.name === productName);
+    const existing = cart.find((p) => p.name === productName);
     if (existing) {
       existing.qty++;
     } else {
@@ -37,23 +61,31 @@ orderButtons.forEach((btn) => {
     }
 
     updateCartDisplay();
-    form.classList.remove("hidden");
-    invoice.classList.add("hidden");
+    invoice.classList.add("hidden"); // إخفاء الفاتورة
+    openDrawer(); // افتح الدروار بدل ما نظهر الفورم في الصفحة
   });
 });
 
-// عرض مصاريف الشحن
+/* ---------- عرض مصاريف الشحن ---------- */
 regionSelect.addEventListener("change", () => {
   const region = regionSelect.value;
   if (shippingPrices[region]) {
-    shippingCostDisplay.textContent = `📦 مصاريف الشحن: ${shippingPrices[region]} جنيهّ`;
+    shippingCostDisplay.textContent = `📦 مصاريف الشحن: ${shippingPrices[region]} جنيه`;
+  } else {
+    shippingCostDisplay.textContent = "";
   }
 });
 
-// تحديث عرض المنتجات في الفورم
+/* ---------- تحديث عرض المنتجات داخل الفورم ---------- */
 function updateCartDisplay() {
   const container = document.getElementById("productsContainer");
-  container.innerHTML = "";
+  container.innerHTML = "<h3>Products</h3>";
+
+  if (cart.length === 0) {
+    container.innerHTML += `<p style="color:#6b7280">لا توجد منتجات بعد.</p>`;
+    return;
+  }
+
   cart.forEach((item, index) => {
     container.innerHTML += `
       <div class="product">
@@ -66,22 +98,27 @@ function updateCartDisplay() {
   });
 }
 
-// تغيير الكمية
-function changeQty(index, change) {
+// تغيير الكمية (مكشوفة لـ onclick)
+window.changeQty = function (index, change) {
   cart[index].qty += change;
   if (cart[index].qty <= 0) {
     cart.splice(index, 1);
   }
   updateCartDisplay();
-}
+};
 
-// عند إرسال الفورم
-form.addEventListener("submit", function(e) {
+/* ---------- إرسال الفورم ---------- */
+form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  if (cart.length === 0) {
+    alert("أضف منتجًا إلى السلة أولًا.");
+    return;
+  }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
   const region = regionSelect.value;
   const shipping = shippingPrices[region] || 0;
 
@@ -104,7 +141,7 @@ form.addEventListener("submit", function(e) {
   // حساب الإجمالي
   let productsListHTML = "";
   let totalBeforeDiscount = 0;
-  cart.forEach(item => {
+  cart.forEach((item) => {
     const subtotal = item.price * item.qty;
     totalBeforeDiscount += subtotal;
     productsListHTML += `<p>${item.name} - ${item.price} × ${item.qty} = ${subtotal} EGP</p>`;
@@ -123,29 +160,44 @@ form.addEventListener("submit", function(e) {
     shipping: shipping,
     discount: discount,
     coupon_code: couponCode,
-    total: total
+    total: total,
   };
 
   console.log("بيانات هتتبعت:", templateParams);
 
-  emailjs.send("service_zhqzk68","template_ptptwbr", templateParams,"PDD64lZbijtiyOxUn")
-    .then(function(response) {
-      console.log("SUCCESS!", response.status, response.text);
-      invoice.innerHTML = `
-        <h3>✅SUCCESS!</h3>
-        <p>👤 Name: ${name}</p>
-        <p>📞 Phone: ${phone}</p>
-        <p>📍 Address: ${address} - ${region}</p>
-        ${productsListHTML}
-        <p>📦 Shipping: ${shipping} EGP</p>
-        <hr>
-        <p><strong>Total: ${total} EGP</strong></p>
-      `;
-      invoice.classList.remove("hidden");
-      form.classList.add("hidden");
-      cart = []; // تفريغ السلة
-    }, function(error) {
-      console.log("FAILED...", error);
-      alert("حدث خطأ أثناء إرسال الطلب. حاول تاني.");
-    });
+  emailjs
+    .send("service_zhqzk68", "template_ptptwbr", templateParams, "PDD64lZbijtiyOxUn")
+    .then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+
+        // عرض الفاتورة
+        invoice.innerHTML = `
+          <h3>✅ SUCCESS!</h3>
+          <p>👤 Name: ${name}</p>
+          <p>📞 Phone: ${phone}</p>
+          <p>📍 Address: ${address} - ${region}</p>
+          ${productsListHTML}
+          <p>📦 Shipping: ${shipping} EGP</p>
+          <hr>
+          <p><strong>Total: ${total} EGP</strong></p>
+        `;
+        invoice.classList.remove("hidden");
+
+        // تفريغ السلة + تحديث العرض
+        cart = [];
+        updateCartDisplay();
+
+        // قفل الدروار
+        closeDrawer();
+
+        // إعادة ضبط الفورم
+        form.reset();
+        shippingCostDisplay.textContent = "";
+      },
+      function (error) {
+        console.log("FAILED...", error);
+        alert("حدث خطأ أثناء إرسال الطلب. حاول تاني.");
+      }
+    );
 });

@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wavly</title>
+    <title>Wavly — Caps</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="./css/style.css" />
 
+    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
       (function () {
@@ -15,114 +18,159 @@
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="logo">Wavly</div>
+    <header class="navbar">
+      <div class="logo">WVLY</div>
     </header>
 
     <!-- Banner -->
     <section class="banner">
-      <h1>Caps</h1>
-      <p>!Choose your favorite cap and order it now</p>
+      <div class="banner-inner">
+        <h1>Caps&poster</h1>
+        <p>!Choose your favorite Caps&poster and order it now</p>
+      </div>
     </section>
-    <!DOCTYPE html>
-    <html lang="ar">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>طلب كاب</title>
-        <link rel="stylesheet" href="style.css" />
-      </head>
-      <body>
-        <div class="caps-container">
-          <div class="cap" data-name="Black  " data-price="150">
-            <img
-              src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥ (2).jpg"
-              alt="كاب أسود"
-            />
-            <h3>200EG</h3>
-            <button class="order-btn">Order now</button>
-          </div>
-          <div class="cap" data-name=" Black  " data-price="140">
-            <img src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥.jpg" alt="كاب أبيض" />
-            <h3>100EG</h3>
-            <button class="order-btn">Order now</button>
-          </div>
 
-          <div class="cap" data-name="كاب اخضر" data-price="30">
-            <img
-              src="./imges/photo_٢٠٢٥-٠٨-٠٧_٠٥-٢٩-١٥ (2).jpg"
-              alt="whiate  "
-            />
-            <h3>150EG</h3>
-            <button class="order-btn">Order now</button>
+    <!-- Products Grid -->
+    <main class="page">
+      <h2 class="section-title">المنتجات</h2>
+
+      <div class="caps-container">
+        <!-- منتج 1 -->
+        <div class="cap" data-name="Black Cap" data-price="200">
+          <div class="media">
+            <img src="./imges/BLACK.jpg" alt="Black Cap" />
           </div>
-          <!-- زود كابات هنا -->
+          <div class="cap-info">
+            <h3 class="cap-title">Black Cap</h3>
+            <span class="cap-price">200 EGP</span>
+          </div>
+          <button class="order-btn">Order now</button>
         </div>
-        <form id="orderForm" class="hidden">
-          <h2>Order Form</h2>
 
-          <label>:Name </label>
-          <input type="text" id="name" required />
-
-          <label>:Phone </label>
-          <input type="text" id="phone" required />
-
-          <label>:Address </label>
-          <input type="text" id="address" required />
-
-          <label>:Region </label>
-          <select id="region" required>
-            <option value="">select</option>
-            <option value="cairo">maadi-cairo</option>
-            <option value="sadat-city">sadat-city</option>
-            <option value="Helwan University">Helwan University</option>
-            <option value="King Salman University">
-              King Salman University
-            </option>
-            <option value="Another">Another</option>
-          </select>
-
-          <div class="form-group">
-            <label for="coupon">🎁 :coupon</label>
-            <input type="text" id="coupon" placeholder="مثال: SAVE20" />
+        <!-- منتج 2 -->
+        <div class="cap" data-name="White Cap" data-price="150">
+          <div class="media">
+            <img src="./imges/WHAITE.jpg" alt="White Cap" />
           </div>
-
-          <p id="shippingCost"></p>
-
-          <div id="productsContainer">
-            <h3>Products</h3>
-            <!-- أول منتج افتراضي -->
-            <div class="product">
-              <label>Product Name:</label>
-              <input type="text" name="productName[]" required />
-
-              <label>Price:</label>
-              <input type="number" name="productPrice[]" required />
-
-              <label>Quantity:</label>
-              <input
-                type="number"
-                name="productQty[]"
-                value="1"
-                min="1"
-                required
-              />
-            </div>
+          <div class="cap-info">
+            <h3 class="cap-title">White Cap</h3>
+            <span class="cap-price">150 EGP</span>
           </div>
+          <button class="order-btn">Order now</button>
+        </div>
 
-          <br /><br />
-          <button type="submit">Submit</button>
-        </form>
+        <!-- منتج 3 -->
+        <div class="cap" data-name="Bigge Cap" data-price="180">
+          <div class="media">
+            <img src="./imges/pagee.jpg" alt="BiggeCap" />
+          </div>
+          <div class="cap-info">
+            <h3 class="cap-title">Bigge Cap</h3>
+            <span class="cap-price">180 EGP</span>
+          </div>
+          <button class="order-btn">Order now</button>
+        </div>
 
-        <div id="invoice" class="hidden"></div>
+        <!-- منتج 4 -->
+        <div class="cap" data-name="poster fury" data-price="180">
+          <div class="media">
+            <img src="./imges/fury.jpg" alt="poster fury" />
+          </div>
+          <div class="cap-info">
+            <h3 class="cap-title">poster fury</h3>
+            <span class="cap-price">180 EGP</span>
+          </div>
+          <button class="order-btn">Order now</button>
+        </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-          <p>© 2025 Wavly. sdfghasdfghjsdfghكل الحقوق محفوظة.</p>
-        </footer>
+        <!-- منتج 5 -->
+        <div class="cap" data-name="poster se7en" data-price="180">
+          <div class="media">
+            <img src="./imges/se7en.jpg" alt="poster se7en" />
+          </div>
+          <div class="cap-info">
+            <h3 class="cap-title">poster se7en</h3>
+            <span class="cap-price">180 EGP</span>
+          </div>
+          <button class="order-btn">Order now</button>
+        </div>
 
-        <script src="./script/script.js"></script>
-      </body>
-    </html>
+        <!-- منتج 6 -->
+        <div class="cap" data-name="poster Avengers" data-price="180">
+          <div class="media">
+            <img src="./imges/Avengers.jpg" alt="poster Avengers" />
+          </div>
+          <div class="cap-info">
+            <h3 class="cap-title">poster Avengers</h3>
+            <span class="cap-price">180 EGP</span>
+          </div>
+          <button class="order-btn">Order now</button>
+        </div>
+      </div>
+
+      <!-- مكان يظهر فيه الفاتورة بعد الإرسال -->
+      <div id="invoice" class="invoice hidden"></div>
+    </main>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <!-- Order Drawer (Slide) -->
+    <aside
+      id="orderDrawer"
+      class="drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drawerTitle"
+    >
+      <div class="drawer-header">
+        <h2 id="drawerTitle">طلب المنتج</h2>
+        <button id="closeDrawer" class="close-x" aria-label="إغلاق">✕</button>
+      </div>
+
+      <!-- نفس الفورم الأصلي لكن داخل الدروار -->
+      <form id="orderForm">
+        <label>:Name</label>
+        <input type="text" id="name" required />
+
+        <label>:Phone</label>
+        <input type="text" id="phone" required />
+
+        <label>:Address</label>
+        <input type="text" id="address" required />
+
+        <label>:Region</label>
+        <select id="region" required>
+          <option value="">select</option>
+          <option value="cairo">maadi-cairo</option>
+          <option value="sadat-city">sadat-city</option>
+          <option value="Helwan University">Helwan University</option>
+          <option value="King Salman University">King Salman University</option>
+          <option value="Another">Another</option>
+        </select>
+
+        <div class="form-group">
+          <label for="coupon">🎁 :coupon</label>
+          <input type="text" id="coupon" placeholder="مثال: SAVE20" />
+        </div>
+
+        <p id="shippingCost" class="shipping-note"></p>
+
+        <div id="productsContainer" class="products-container">
+          <h3>Products</h3>
+          <!-- يتم حقنه ديناميكيًا من السكربت -->
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 Wavly. كل الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- Script -->
+    <script src="./script/script.js"></script>
   </body>
 </html>
