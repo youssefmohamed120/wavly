@@ -10,7 +10,9 @@
     <!-- تحميل EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-      emailjs.init("cDs8J06z3bJkwiROm"); // ضع هنا User ID من حساب EmailJS
+      (function () {
+        emailjs.init("cDs8J06z3bJkwiROm");
+      })();
     </script>
 
     <nav class="nav">
