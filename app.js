@@ -1,22 +1,31 @@
 // ====================== منتجات المتجر ======================
 const PRODUCTS = [
-  { id: 'cap-black', title: 'Black Cap', price: 200, img: 'https://picsum.photos/seed/cap1/800/600' },
-  { id: 'cap-white', title: 'White Cap', price: 220, img: 'https://picsum.photos/seed/cap2/800/600' },
-  { id: 'cap-blue', title: 'Blue Cap', price: 240, img: 'https://picsum.photos/seed/cap3/800/600' },
-  { id: 'cap-style', title: 'Retro Cap', price: 260, img: 'https://picsum.photos/seed/cap4/800/600' }
+  { id: 'cap-black', title: 'Black Cap', price: 200, img: '/imegs/photo_٢٠٢٥-١٠-٠٩_١٦-٣٢-١٧.jpg' },
+  { id: 'cap-white', title: 'White Cap', price: 200, img: '/imegs/2.jpg' },
+  { id: 'cap-blue', title: 'Blue Cap', price: 200, img: '/imegs/3.jpg' },
+   
 ];
 
 // ====================== عرض المنتجات ======================
 const productsEl = document.getElementById('products');
-function renderProducts(){
+function renderProducts() {
   productsEl.innerHTML = '';
   PRODUCTS.forEach(p => {
+    const fakePrice = Math.round(p.price * 1.3); // السعر الوهمي
+
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <img loading="lazy" src="${p.img}" alt="${p.title}" style="width:100%;height:120px;object-fit:cover">
+     <img loading="lazy" src="${p.img}" alt="${p.title}" 
+     style="width:100%;height:250px;object-fit:contain;background-color:#0b1220;border-radius:10px;">
+
       <h3>${p.title}</h3>
-      <div class="price">${p.price} EGP</div>
+
+      <div class="price">
+        <span class="old-price">${fakePrice} EGP</span><br>
+        <span class="new-price">${p.price} EGP</span>
+      </div>
+
       <div style="display:flex;gap:8px;margin-top:8px;">
         <button class="btn ghost" data-id="${p.id}">عرض</button>
         <button class="btn primary" data-add="${p.id}">أضف للسلة</button>
@@ -26,6 +35,9 @@ function renderProducts(){
   });
 }
 renderProducts();
+
+
+ 
 
 // ====================== إدارة السلة ======================
 const CART_KEY = 'wavly_cart_v1';
@@ -43,7 +55,7 @@ document.addEventListener('click', (e) => {
   else if(e.target.matches('[data-id]')) {
     const id = e.target.getAttribute('data-id');
     const p = PRODUCTS.find(x=>x.id===id);
-    alert(`${p.title}\nالسعر: ${p.price} EGP`);
+     
   }
 });
 
@@ -89,7 +101,7 @@ function renderCartItems(){
     const div = document.createElement('div');
     div.className = 'item';
     div.innerHTML = `
-      <img src="${p.img}" alt="${p.title}" style="width:60px;height:60px;object-fit:cover">
+      <img src="${p.img}" alt="${p.title}" style="width:60px;height:50px;object-fit:cover">
       <div style="flex:1;display:inline-block;margin-right:10px">
         <div>${p.title}</div>
         <div class="muted">${p.price} EGP</div>
@@ -160,4 +172,35 @@ document.getElementById('checkout-form').addEventListener('submit', async (e)=>{
     console.error(err);
     msg.textContent = 'فشل إرسال البريد. حاول مرة أخرى.';
   }
+});
+
+
+// ====================== مودال عرض المنتج ======================
+const productModal = document.getElementById('product-modal');
+const productImg = document.getElementById('product-img');
+const productTitle = document.getElementById('product-title');
+const productPrice = document.getElementById('product-price');
+const addToCartBtn = document.getElementById('add-to-cart-btn');
+const closeProduct = document.getElementById('close-product');
+
+document.addEventListener('click', (e) => {
+  if(e.target.matches('[data-id]')) {
+    const id = e.target.getAttribute('data-id');
+    const p = PRODUCTS.find(x=>x.id===id);
+
+    // عرض بيانات المنتج في المودال
+    productImg.src = p.img;
+    productImg.alt = p.title;
+    productTitle.textContent = p.title;
+    productPrice.textContent = `${p.price} EGP`;
+    addToCartBtn.setAttribute('data-add', id);
+
+    productModal.classList.remove('hidden');
+  }
+});
+
+// غلق المودال
+closeProduct.addEventListener('click', ()=> productModal.classList.add('hidden'));
+productModal.addEventListener('click', (e)=>{
+  if(e.target === productModal) productModal.classList.add('hidden');
 });

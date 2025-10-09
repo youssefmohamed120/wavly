@@ -1,5 +1,5 @@
 :root{
-  --bg:#071022;
+  --bg:#020918;
   --card:#0b1220;
   --accent:#ff5c5c;
   --muted:#9aa4b2;
@@ -42,3 +42,26 @@ body{font-family: "Cairo", Arial, sans-serif; margin:0; background:linear-gradie
   .card img{height:140px}
   .modal-inner{max-width:95%}
 }
+
+
+.price {
+  
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.95rem;
+  display: block;
+}
+
+.new-price {
+  color: #e63946;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: block;
+}
+
+ 
