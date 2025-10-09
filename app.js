@@ -1,10 +1,10 @@
 // ====================== منتجات المتجر ======================
 const PRODUCTS = [
-  { id: 'cap-black', title: 'Black Cap', price: 200, img: '/imegs/photo_٢٠٢٥-١٠-٠٩_١٦-٣٢-١٧.jpg' },
-  { id: 'cap-white', title: 'White Cap', price: 200, img: '/imegs/2.jpg' },
-  { id: 'cap-blue', title: 'Blue Cap', price: 200, img: '/imegs/3.jpg' },
-   
+  { id: 'cap-black', title: 'Black Cap', price: 200, img: 'imegs/photo_٢٠٢٥-١٠-٠٩_١٦-٣٢-١٧.jpg' },
+  { id: 'cap-white', title: 'White Cap', price: 200, img: 'imegs/2.jpg' },
+  { id: 'cap-blue', title: 'Blue Cap', price: 200, img: 'imegs/3.jpg' },
 ];
+
 
 // ====================== عرض المنتجات ======================
 const productsEl = document.getElementById('products');
@@ -162,7 +162,7 @@ document.getElementById('checkout-form').addEventListener('submit', async (e)=>{
 };
 
   try {
-    await emailjs.send('service_2tq3uun', 'template_hyw744u', templateParams);
+    await emailjs.send('service_099ey3g', 'template_1ai2cok', templateParams);
     msg.textContent = 'تم إرسال الطلب بنجاح. شكرًا!';
     showToast('طلبك تم بنجاح!');
     localStorage.removeItem(CART_KEY);
