@@ -1,176 +1,92 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wavly — Caps</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="./css/style.css" />
-
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-      (function () {
-        emailjs.init("PDD64lZbijtiyOxUn");
-      })();
-    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>wvly caps — متجر الكابات</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Header -->
-    <header class="navbar">
-      <div class="logo">WVLY</div>
+    <!-- تحميل EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      emailjs.init("0G9Oxo5FYYdwOK8OC"); // ضع هنا User ID من حساب EmailJS
+    </script>
+
+    <nav class="nav">
+      <div class="brand">wvly<span class="accent"> caps</span></div>
+      <div class="nav-links">
+        <a href="about.html">من نحن</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a id="open-cart" class="cart-btn">🛒 <span id="cart-count">0</span></a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>كابات شبابية بجودة عالية</h1>
+      <p>تسوق الآن — الدفع آمن عبر فوري أو الدفع عند الاستلام</p>
     </header>
 
-    <!-- Banner -->
-    <section class="banner">
-      <div class="banner-inner">
-        <h1>Caps&poster</h1>
-        <p>!Choose your favorite Caps&poster and order it now</p>
-      </div>
-    </section>
-
-    <!-- Products Grid -->
-    <main class="page">
-      <h2 class="section-title">المنتجات</h2>
-
-      <div class="caps-container">
-        <!-- منتج 1 -->
-        <div class="cap" data-name="Black Cap" data-price="200">
-          <div class="media">
-            <img src="./imges/BLACK.jpg" alt="Black Cap" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">Black Cap</h3>
-            <span class="cap-price">200 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-
-        <!-- منتج 2 -->
-        <div class="cap" data-name="White Cap" data-price="150">
-          <div class="media">
-            <img src="./imges/WHAITE.jpg" alt="White Cap" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">White Cap</h3>
-            <span class="cap-price">150 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-
-        <!-- منتج 3 -->
-        <div class="cap" data-name="Bigge Cap" data-price="180">
-          <div class="media">
-            <img src="./imges/pagee.jpg" alt="BiggeCap" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">Bigge Cap</h3>
-            <span class="cap-price">180 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-
-        <!-- منتج 4 -->
-        <div class="cap" data-name="poster fury" data-price="180">
-          <div class="media">
-            <img src="./imges/fury.jpg" alt="poster fury" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">poster fury</h3>
-            <span class="cap-price">180 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-
-        <!-- منتج 5 -->
-        <div class="cap" data-name="poster se7en" data-price="180">
-          <div class="media">
-            <img src="./imges/se7en.jpg" alt="poster se7en" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">poster se7en</h3>
-            <span class="cap-price">180 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-
-        <!-- منتج 6 -->
-        <div class="cap" data-name="poster Avengers" data-price="180">
-          <div class="media">
-            <img src="./imges/Avengers.jpg" alt="poster Avengers" />
-          </div>
-          <div class="cap-info">
-            <h3 class="cap-title">poster Avengers</h3>
-            <span class="cap-price">180 EGP</span>
-          </div>
-          <button class="order-btn">Order now</button>
-        </div>
-      </div>
-
-      <!-- مكان يظهر فيه الفاتورة بعد الإرسال -->
-      <div id="invoice" class="invoice hidden"></div>
+    <main>
+      <section id="products" class="grid"></section>
     </main>
 
-    <!-- Overlay -->
-    <div id="overlay" class="overlay" aria-hidden="true"></div>
-
-    <!-- Order Drawer (Slide) -->
-    <aside
-      id="orderDrawer"
-      class="drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="drawerTitle"
-    >
-      <div class="drawer-header">
-        <h2 id="drawerTitle">طلب المنتج</h2>
-        <button id="closeDrawer" class="close-x" aria-label="إغلاق">✕</button>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-inner">
+        <button class="close" id="close-cart">×</button>
+        <h2>سلتك</h2>
+        <div id="cart-items"></div>
+        <div class="cart-summary">
+          <div>الإجمالي: <strong id="cart-total">0</strong> EGP</div>
+          <button id="go-checkout" class="btn primary">إتمام الدفع</button>
+        </div>
       </div>
+    </div>
 
-      <!-- نفس الفورم الأصلي لكن داخل الدروار -->
-      <form id="orderForm">
-        <label>:Name</label>
-        <input type="text" id="name" required />
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal hidden">
+      <div class="modal-inner">
+        <button class="close" id="close-checkout">×</button>
+        <h2>بيانات الدفع</h2>
+        <form id="checkout-form">
+          <div class="row">
+            <label>الاسم الكامل</label>
+            <input name="customerName" required />
+          </div>
+          <div class="row">
+            <label>الهاتف</label>
+            <input name="customerMobile" required pattern="\d+" />
+          </div>
+          <div class="row">
+            <label>العنوان</label>
+            <input name="address" required />
+          </div>
+          <div class="row">
+            <label>البريد الإلكتروني (اختياري)</label>
+            <input name="customerEmail" type="email" />
+          </div>
+          <div class="row">
+            <button type="submit" class="btn primary">إتمام الطلب</button>
+          </div>
+        </form>
+        <div id="checkout-msg" class="muted"></div>
+      </div>
+    </div>
 
-        <label>:Phone</label>
-        <input type="text" id="phone" required />
+    <!-- Payment overlay for iframe (للتوافق مستقبلاً) -->
+    <div id="payment-overlay" class="modal hidden">
+      <div class="iframe-wrapper">
+        <button class="close-iframe" id="close-iframe">×</button>
+        <iframe
+          id="payment-iframe"
+          src=""
+          frameborder="0"
+          allowpaymentrequest
+        ></iframe>
+      </div>
+    </div>
 
-        <label>:Address</label>
-        <input type="text" id="address" required />
-
-        <label>:Region</label>
-        <select id="region" required>
-          <option value="">select</option>
-          <option value="cairo">maadi-cairo</option>
-          <option value="sadat-city">sadat-city</option>
-          <option value="Helwan University">Helwan University</option>
-          <option value="King Salman University">King Salman University</option>
-          <option value="Another">Another</option>
-        </select>
-
-        <div class="form-group">
-          <label for="coupon">🎁 :coupon</label>
-          <input type="text" id="coupon" placeholder="مثال: SAVE20" />
-        </div>
-
-        <p id="shippingCost" class="shipping-note"></p>
-
-        <div id="productsContainer" class="products-container">
-          <h3>Products</h3>
-          <!-- يتم حقنه ديناميكيًا من السكربت -->
-        </div>
-
-        <button type="submit" class="submit-btn">Submit</button>
-      </form>
-    </aside>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p>© 2025 Wavly. كل الحقوق محفوظة.</p>
-    </footer>
-
-    <!-- Script -->
-    <script src="./script/script.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
