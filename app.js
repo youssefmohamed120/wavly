@@ -1,8 +1,8 @@
 // ====================== منتجات المتجر ======================
 const PRODUCTS = [
-  { id: 'cap-black', title: 'Blue Cap 1', price: 200, img:'imegs/1.jpg'},
-  { id: 'cap-white', title: 'Red Cap 2', price: 200, img:'imegs/2.jpg'},
-  { id: 'cap-blue', title: 'Black Cap 3', price: 200, img:'imegs/3.jpg'},
+  { id: 'cap-black', title: 'Blue Cap 1', price: 199, img:'imegs/1.jpg'},
+  { id: 'cap-white', title: 'Red Cap 2', price: 199, img:'imegs/2.jpg'},
+  { id: 'cap-blue', title: 'Black Cap 3', price: 199, img:'imegs/3.jpg'},
 ];
 
 
@@ -11,7 +11,7 @@ const productsEl = document.getElementById('products');
 function renderProducts() {
   productsEl.innerHTML = '';
   PRODUCTS.forEach(p => {
-    const fakePrice = Math.round(p.price * 1.3); // السعر الوهمي
+    const fakePrice = Math.round(p.price * 1.4); // السعر الوهمي
 
     const card = document.createElement('div');
     card.className = 'card';
