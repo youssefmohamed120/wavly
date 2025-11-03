@@ -1,8 +1,8 @@
 // ====================== منتجات المتجر ======================
 const PRODUCTS = [
-  { id: 'cap-black', title: 'Blue Cap 1', price: 199, img:'imegs/1.jpg'},
-  { id: 'cap-white', title: 'Red Cap 2', price: 199, img:'imegs/2.jpg'},
-  { id: 'cap-blue', title: 'Black Cap 3', price: 199, img:'imegs/3.jpg'},
+  { id: 'cap-black', title: 'Blue Cap 1', price: 100, img:'imegs/1.jpg'},
+  { id: 'cap-white', title: 'Red Cap 2', price: 100, img:'imegs/2.jpg'},
+  { id: 'cap-blue', title: 'Black Cap 3', price: 100, img:'imegs/3.jpg'},
 ];
 
 
